@@ -1,13 +1,79 @@
 import models.Brand;
 import models.CarModel;
 import models.CarYear;
+import controllers.BrandController;
 
 public class App {
-        public static void main(String[] args) throws Exception {
-                System.out.println("Examen interciclo de Estructuras de Datos");
-                System.out.println("====Configurar studente.env====");
+       public static void main(String[] args) throws Exception {
 
-        }
+    System.out.println("Examen interciclo de Estructuras de Datos");
+
+    BrandController controller = new BrandController();
+
+    Brand[] brands = createBrands();
+
+    System.out.println("\nOriginal:");
+
+    for (Brand brand : brands) {
+
+        System.out.println(
+                brand.getBrandName()
+                        + " - Años válidos: "
+                        + brand.getTotalValidYears());
+    }
+
+    controller.sortBubbleDesc(brands);
+
+    System.out.println("\nOrdenado por Bubble Sort descendente:");
+
+    for (Brand brand : brands) {
+
+        System.out.println(
+                brand.getBrandName()
+                        + " - Años válidos: "
+                        + brand.getTotalValidYears());
+    }
+
+    System.out.println("\nBuscar marca con 7 años válidos:");
+
+    Brand result1 = controller.binarySearchByValidYears(
+            brands,
+            7,
+            false);
+
+    if (result1 != null) {
+
+        System.out.println(
+                "Encontrada: "
+                        + result1.getBrandName()
+                        + " - Años válidos: "
+                        + result1.getTotalValidYears());
+
+    } else {
+
+        System.out.println("No encontrada");
+    }
+    
+    System.out.println("\nBuscar marca con 4 años válidos:");
+
+    Brand result2 = controller.binarySearchByValidYears(
+            brands,
+            4,
+            false);
+
+    if (result2 != null) {
+
+        System.out.println(
+                "Encontrada: "
+                        + result2.getBrandName()
+                        + " - Años válidos: "
+                        + result2.getTotalValidYears());
+
+    } else {
+
+        System.out.println("No encontrada");
+    }
+}
 
         /**
          * Crea un arreglo de marcas de ejemplo para pruebas
